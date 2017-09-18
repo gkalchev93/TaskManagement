@@ -1,0 +1,66 @@
+CREATE TABLE public."Task"
+(
+    "Id" uuid NOT NULL,
+    "CreatedDate" date NOT NULL,
+    "RequiredDate" date NOT NULL,
+    "Desc" text COLLATE pg_catalog."default" NOT NULL,
+    "AssignedTo" text COLLATE pg_catalog."default" NOT NULL,
+    "NextActionDate" date,
+    "State" "TaskState" NOT NULL DEFAULT 'New'::"TaskState",
+    "Type" "TaskType" NOT NULL DEFAULT 'Task'::"TaskType",
+    CONSTRAINT "Task_pkey" PRIMARY KEY ("Id")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Task"
+    OWNER to postgres;
+
+
+CREATE TABLE public."Comments"
+(
+    "Id" uuid NOT NULL,
+    "CreatedOn" date NOT NULL,
+    "Description" text COLLATE pg_catalog."default" NOT NULL,
+    "Reminder" date,
+    "TaskId" uuid NOT NULL,
+    "Type" "CommentType" NOT NULL DEFAULT 'Normal'::"CommentType",
+    "Author" text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Comments_pkey" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_TaskId" FOREIGN KEY ("TaskId")
+        REFERENCES public."Task" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Comments"
+    OWNER to postgres;
+	
+	
+CREATE TYPE public."CommentType" AS ENUM
+    ('Normal', 'Reminder');
+
+ALTER TYPE public."CommentType"
+    OWNER TO postgres;
+	
+	
+CREATE TYPE public."TaskState" AS ENUM
+    ('New', 'Processing', 'OnHold', 'Finished', 'Closed');
+
+ALTER TYPE public."TaskState"
+    OWNER TO postgres;
+	
+	
+CREATE TYPE public."TaskType" AS ENUM
+    ('Task', 'Estimate');
+
+ALTER TYPE public."TaskType"
+    OWNER TO postgres;
+	
+	

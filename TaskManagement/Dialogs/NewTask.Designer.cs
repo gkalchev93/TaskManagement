@@ -163,12 +163,6 @@
             // cbUser
             // 
             this.cbUser.FormattingEnabled = true;
-            this.cbUser.Items.AddRange(new object[] {
-            "Ivan",
-            "Gosho",
-            "Petyr",
-            "Pesho",
-            "Ivo"});
             this.cbUser.Location = new System.Drawing.Point(98, 277);
             this.cbUser.Name = "cbUser";
             this.cbUser.Size = new System.Drawing.Size(251, 21);

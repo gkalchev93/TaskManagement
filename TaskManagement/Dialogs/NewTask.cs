@@ -33,6 +33,7 @@ namespace TaskManagement
             cbType.DataSource = Enum.GetValues(typeof(TaskType));
             cbType.SelectedIndex = 0;
 
+            cbUser.DataSource = Enum.GetValues(typeof(Users));
             cbUser.SelectedIndex = 0;
         }
 

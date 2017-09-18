@@ -9,9 +9,10 @@ namespace TaskManagement.Models
 {
     public class Comment
     {
-        DateTime CreatedOn { get; set; }
-        string CommentText { get; set; }
-        CommentType Type { get; set; }
-        DateTime Reminder { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string Author { get; set; }
+        public string CommentText { get; set; }
+        public CommentType Type { get; set; }
+        public DateTime Reminder { get; set; }
     }
 }
